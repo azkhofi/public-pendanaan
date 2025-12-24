@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dokumentasi Dana Masuk</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <style>
+      :root {
+        --dark-bg: #0f172a;
+        --dark-card: #1e293b;
+        --dark-card-hover: #334155;
+        --primary-dark: #3b82f6;
+        --secondary-dark: #8b5cf6;
+        --accent-dark: #10b981;
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+        --border-dark: #475569;
+        --shadow-dark: rgba(0, 0, 0, 0.3);
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, sans-serif;
+        background: linear-gradient(135deg, var(--dark-bg) 0%, #1e1b4b 100%);
+        min-height: 100vh;
+        color: var(--text-primary);
+        overflow-x: hidden;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--dark-card);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--secondary-dark)
+        );
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(
+          135deg,
+          var(--secondary-dark),
+          var(--primary-dark)
+        );
+      }
+
+      /* Navigation */
+      .navbar {
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-dark);
+        box-shadow: 0 4px 30px var(--shadow-dark);
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--secondary-dark)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Stat Cards - Dark Theme */
+      .stat-card {
+        background: linear-gradient(145deg, var(--dark-card), #1a2236);
+        border: 1px solid var(--border-dark);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px var(--shadow-dark);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        height: 100%;
+      }
+
+      .stat-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-dark),
+          var(--accent-dark)
+        );
+        z-index: 2;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        border-color: var(--primary-dark);
+      }
+
+      .stat-card-content {
+        padding: 24px;
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+      }
+
+      .stat-label i {
+        margin-right: 10px;
+        font-size: 1rem;
+      }
+
+      .stat-number {
+        font-size: 2.2rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin: 16px 0;
+        background: linear-gradient(
+          135deg,
+          var(--text-primary),
+          var(--text-secondary)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        flex: 1;
+        display: flex;
+        align-items: center;
+      }
+
+      .stat-icon {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        font-size: 3.5rem;
+        opacity: 0.1;
+        transition: all 0.4s ease;
+      }
+
+      .stat-card:hover .stat-icon {
+        opacity: 0.15;
+        transform: scale(1.1);
+      }
+
+      /* Custom color for each card */
+      .stat-card:nth-child(1)::before {
+        background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      }
+      .stat-card:nth-child(2)::before {
+        background: linear-gradient(90deg, #10b981, #34d399);
+      }
+      .stat-card:nth-child(3)::before {
+        background: linear-gradient(90deg, #8b5cf6, #a78bfa);
+      }
+      .stat-card:nth-child(4)::before {
+        background: linear-gradient(90deg, #f59e0b, #fbbf24);
+      }
+
+      .stat-card:nth-child(1) .stat-label i {
+        color: #60a5fa;
+      }
+      .stat-card:nth-child(2) .stat-label i {
+        color: #34d399;
+      }
+      .stat-card:nth-child(3) .stat-label i {
+        color: #a78bfa;
+      }
+      .stat-card:nth-child(4) .stat-label i {
+        color: #fbbf24;
+      }
+
+      /* Main Cards */
+      .main-card {
+        background: linear-gradient(145deg, var(--dark-card), #1a2236);
+        border: 1px solid var(--border-dark);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px var(--shadow-dark);
+        overflow: hidden;
+        margin-bottom: 24px;
+      }
+
+      .card-header {
+        background: linear-gradient(
+          90deg,
+          rgba(30, 41, 59, 0.9),
+          rgba(30, 41, 59, 0.7)
+        );
+        border-bottom: 1px solid var(--border-dark);
+        padding: 20px 24px;
+        backdrop-filter: blur(10px);
+      }
+
+      .card-header h5 {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .card-header h5 i {
+        margin-right: 12px;
+        color: var(--primary-dark);
+      }
+
+      .card-body {
+        padding: 24px;
+      }
+
+      /* Table Styling */
+      .table {
+        color: var(--text-primary);
+        border-color: var(--border-dark);
+        margin-bottom: 0;
+      }
+
+      .table thead th {
+        border-bottom: 2px solid var(--border-dark);
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+        padding: 16px 12px;
+        background: rgba(30, 41, 59, 0.5);
+      }
+
+      .table tbody td {
+        border-color: var(--border-dark);
+        padding: 16px 12px;
+        vertical-align: middle;
+      }
+
+      .table tbody tr {
+        transition: all 0.3s ease;
+      }
+
+      .table tbody tr:hover {
+        background: rgba(59, 130, 246, 0.1);
+        transform: translateX(4px);
+      }
+
+      /* Badge Styling */
+      .badge {
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        border: 1px solid transparent;
+      }
+
+      .badge.bg-primary {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark),
+          #60a5fa
+        ) !important;
+      }
+      .badge.bg-success {
+        background: linear-gradient(135deg, #10b981, #34d399) !important;
+      }
+
+      .badge.bg-warning {
+        background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
+      }
+
+      .badge.bg-danger {
+        background: linear-gradient(135deg, #ef4444, #f87171) !important;
+      }
+
+      /* Animation untuk data baru */
+      @keyframes newDataPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+        }
+      }
+
+      .new-data-indicator {
+        animation: newDataPulse 2s infinite;
+      }
+
+      /* Styling untuk update status */
+      #last-update-info .progress {
+        height: 6px;
+        border-radius: 3px;
+      }
+
+      #last-update-info .progress-bar {
+        border-radius: 3px;
+      }
+
+      /* Progress Bar */
+      .progress {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        height: 8px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        background: linear-gradient(
+          90deg,
+          var(--primary-dark),
+          var(--accent-dark)
+        );
+        border-radius: 10px;
+      }
+
+      /* Recent Transactions */
+      .recent-transaction {
+        border-left: 4px solid transparent;
+        border-bottom: 1px solid var(--border-dark) !important;
+        background: transparent;
+        transition: all 0.3s ease;
+        padding: 20px;
+      }
+
+      .recent-transaction:hover {
+        border-left-color: var(--primary-dark);
+        background: rgba(59, 130, 246, 0.05);
+        transform: translateX(8px);
+      }
+
+      .recent-transaction:last-child {
+        border-bottom: none !important;
+      }
+
+      /* Footer */
+      .footer {
+        background: rgba(15, 23, 42, 0.9);
+        border-top: 1px solid var(--border-dark);
+        backdrop-filter: blur(10px);
+        margin-top: 60px;
+      }
+
+      /* Button Styling */
+      .btn {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
+        border: none;
+      }
+
+      .btn-outline-light {
+        border: 1px solid var(--border-dark);
+        color: var(--text-primary);
+        background: transparent;
+      }
+
+      .btn-outline-light:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--primary-dark);
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--secondary-dark)
+        );
+        border: none;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+      }
+
+      /* Hero Section */
+      .hero-card {
+        background: linear-gradient(
+          135deg,
+          rgba(30, 41, 59, 0.8),
+          rgba(30, 41, 59, 0.6)
+        );
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 40px;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.1) 0%,
+          rgba(139, 92, 246, 0.1) 100%
+        );
+        z-index: 1;
+      }
+
+      .hero-card > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      .top-donation-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .top-donation-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.03),
+          transparent
+        );
+        transform: translateX(-100%);
+        transition: transform 0.6s;
+      }
+
+      .top-donation-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      .top-donation-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .rank-badge {
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .top-donation-card:hover .rank-badge {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Tambahkan di public.html style section */
+      .top-donation-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 12px !important;
+      }
+
+      .top-donation-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        border-color: rgba(59, 130, 246, 0.5) !important;
+      }
+
+      /* Text truncation utilities */
+      .text-truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      /* Badge styling */
+      .badge {
+        font-size: 0.75rem !important;
+        padding: 3px 8px !important;
+        font-weight: 500 !important;
+      }
+
+      /* Amount display styling */
+      .amount-container {
+        min-width: 100px;
+        max-width: 120px;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .top-donation-card {
+          padding: 12px !important;
+        }
+
+        .rank-badge {
+          width: 32px !important;
+          height: 32px !important;
+          font-size: 1rem !important;
+        }
+
+        .amount-container h4 {
+          font-size: 1.1rem !important;
+        }
+      }
+
+      /* Animation for ranking */
+      @keyframes rankGlow {
+        0%,
+        100% {
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        50% {
+          box-shadow: 0 2px 12px rgba(255, 215, 0, 0.4);
+        }
+      }
+
+      .rank-badge:nth-child(1) {
+        animation: rankGlow 3s ease-in-out infinite;
+      }
+
+      /* Fix for flex layout */
+      .flex-shrink-0 {
+        flex-shrink: 0;
+      }
+
+      .flex-grow-1 {
+        flex-grow: 1;
+      }
+
+      /* Ensure proper spacing */
+      .d-flex > .flex-grow-1 {
+        min-width: 0; /* This is crucial for text truncation in flexbox */
+      }
+
+      /* Info Panel Cards */
+      .info-card {
+        background: linear-gradient(145deg, var(--dark-card), #1a2236);
+        border: 1px solid var(--border-dark);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .info-card:hover {
+        border-color: var(--primary-dark);
+        transform: translateY(-4px);
+      }
+
+      /* Animations */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+        }
+      }
+
+      .glowing {
+        animation: glow 2s ease-in-out infinite;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .stat-number {
+          font-size: 1.8rem;
+        }
+
+        .stat-icon {
+          font-size: 2.8rem;
+        }
+
+        .card-body,
+        .stat-card-content {
+          padding: 16px;
+        }
+
+        .hero-card {
+          border-radius: 16px;
+        }
+      }
+
+      /* Loading Animation */
+      .loading-skeleton {
+        background: linear-gradient(
+          90deg,
+          var(--dark-card) 25%,
+          var(--dark-card-hover) 50%,
+          var(--dark-card) 75%
+        );
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+        border-radius: 8px;
+      }
+
+      @keyframes loading {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      /* Glass Effect */
+      .glass {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Gradient Text */
+      .gradient-text {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--accent-dark)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img
+                        src="logo.png"
+                        alt="Logo"
+                        style="width: 30px; height: 30px; border-radius: 50%"
+                      /></i>   Dokumentasi Dana Masuk
+        </a>
+        <div class="d-flex align-items-center">
+          <span
+            class="text-light me-3 d-none d-md-block"
+            id="last-updated-text"
+          >
+            <i class="fas fa-spinner fa-spin me-1"></i> Memuat...
+          </span>
+          <button onclick="refreshData()" class="btn btn-outline-light btn-sm">
+            <i class="fas fa-sync-alt me-1"></i> Refresh
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-4">
+      <!-- Hero Section -->
+      <div class="row mb-5 animate__animated animate__fadeIn">
+        <div class="col-12">
+          <div class="hero-card">
+            <div class="p-5">
+              <div class="row align-items-center">
+                <div class="col-lg-8">
+                  <h1 class="display-5 fw-bold mb-3 gradient-text">
+                    Dokumentasi Dana Masuk
+                  </h1>
+                  <p class="lead mb-4 text-light">
+                    Anda dapat melihat update sumbangan secara life time di
+                    halaman ini.
+                  </p>
+                  <div class="d-flex align-items-center">
+                    <div
+                      class="glowing rounded-circle bg-primary-dark p-2 me-3"
+                      style="background: rgba(59, 130, 246, 0.2)"
+                    >
+                      <img
+                        src="logo.png"
+                        alt="Logo"
+                        style="width: 48px; height: 48px; border-radius: 50%"
+                      />
+                      <!-- <i class="fas fa-heartbeat fa-2x" style="color: #3b82f6;"></i> -->
+                    </div>
+                    <div>
+                      <h5 class="mb-0 text-light">
+                        Haul Masyayikh dan Harlah ke-77
+                      </h5>
+                      <small class="text-secondary"
+                        >Pondok Pesantren Nurul Jadid</small
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block text-center floating">
+                  <i
+                    class="fas fa-chart-network fa-10x opacity-25"
+                    style="color: #3b82f6"
+                  ></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics Cards -->
+      <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="stat-card animate__animated animate__fadeInLeft">
+            <div class="stat-card-content">
+              <div class="stat-label">
+                <i class="fas fa-money-bill-wave"></i>TOTAL DANA
+              </div>
+              <div class="stat-number" id="total-dana">Rp 0</div>
+              <div class="stat-icon">
+                <i class="fas fa-money-bill-wave"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div
+            class="stat-card animate__animated animate__fadeInLeft"
+            style="animation-delay: 0.1s"
+          >
+            <div class="stat-card-content">
+              <div class="stat-label"><i class="fas fa-list"></i>TRANSAKSI</div>
+              <div class="stat-number" id="total-transaksi">0</div>
+              <div class="stat-icon">
+                <i class="fas fa-list"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div
+            class="stat-card animate__animated animate__fadeInLeft"
+            style="animation-delay: 0.2s"
+          >
+            <div class="stat-card-content">
+              <div class="stat-label"><i class="fas fa-users"></i>DONATUR</div>
+              <div class="stat-number" id="total-donatur">0</div>
+              <div class="stat-icon">
+                <i class="fas fa-users"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div
+            class="stat-card animate__animated animate__fadeInLeft"
+            style="animation-delay: 0.3s"
+          >
+            <div class="stat-card-content">
+              <div class="stat-label"><i class="fas fa-tags"></i>PROGRAM</div>
+              <div class="stat-number" id="total-kategori">0</div>
+              <div class="stat-icon">
+                <i class="fas fa-tags"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="row">
+        <!-- Kategori Breakdown -->
+        <div class="col-lg-8">
+          <div class="main-card animate__animated animate__fadeInUp">
+            <div class="card-header">
+              <h5><i class="fas fa-chart-pie"></i>Rekapitulasi Sumbangan</h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Kategori</th>
+                      <th class="text-center">Jumlah</th>
+                      <th>Total Dana</th>
+                      <th>Persentase</th>
+                    </tr>
+                  </thead>
+                  <tbody id="kategori-breakdown">
+                    <tr>
+                      <td colspan="4" class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="text-secondary mt-2">Memuat data...</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Transactions -->
+          <div
+            class="main-card animate__animated animate__fadeInUp"
+            style="animation-delay: 0.2s"
+          >
+            <div class="card-header">
+              <div class="d-flex justify-content-between align-items-center">
+                <h5><i class="fas fa-history"></i>Sumbangan Terbaru</h5>
+                <span class="badge bg-info" id="transaction-count"
+                  >0 transaksi</span
+                >
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="list-group list-group-flush" id="recent-transactions">
+                <div class="list-group-item text-center py-5">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  <p class="text-secondary mt-2">Memuat data donasi...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Info -->
+        <div class="col-lg-4">
+          <!-- Update Info -->
+          <div
+            class="main-card animate__animated animate__fadeInUp"
+            style="animation-delay: 0.1s"
+          >
+            <div class="card-header">
+              <h5><i class="fas fa-info-circle"></i>Informasi Update</h5>
+            </div>
+            <div class="card-body">
+              <div class="info-card glass">
+                <h6 class="d-flex align-items-center">
+                  <i class="fas fa-trophy me-2 text-warning"></i>
+                  <span>Top 3 Donasi Tertinggi</span>
+                </h6>
+                <div id="latest-update" class="mt-2">
+                  <div class="text-center py-3">
+                    <div
+                      class="spinner-border spinner-border-sm text-primary"
+                      role="status"
+                    >
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="small text-secondary mt-2 mb-0">
+                      Memuat data terbesar...
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="info-card glass">
+                <h6 class="d-flex align-items-center">
+                  <i class="fas fa-clock me-2 text-warning"></i>
+                  <span>Update Otomatis</span>
+                </h6>
+                <p class="mb-0 text-secondary">
+                  Data diperbarui setiap 24x1 waktu kerja
+                </p>
+              </div>
+
+              <div class="text-center mt-4">
+                <button
+                  onclick="refreshData()"
+                  class="btn btn-primary btn-lg w-100 py-3"
+                >
+                  <i class="fas fa-sync-alt me-2"></i> Refresh Data
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Info -->
+          <div
+            class="main-card animate__animated animate__fadeInUp"
+            style="animation-delay: 0.3s"
+          >
+            <div class="card-header">
+              <h5><i class="fas fa-headset"></i>Kontak & Dukungan</h5>
+            </div>
+            <div class="card-body">
+              <div class="info-card glass">
+                <h6 class="d-flex align-items-center">
+                  <i class="fas fa-envelope me-2 text-info"></i>
+                  <span>Email</span>
+                </h6>
+                <p class="mb-0 text-secondary">
+                  humaspendanaanharlah@gmail.com
+                </p>
+              </div>
+
+              <div class="info-card glass">
+                <h6 class="d-flex align-items-center">
+                  <i class="fas fa-phone me-2 text-success"></i>
+                  <span>Telepon</span>
+                </h6>
+                <p class="mb-0 text-secondary">+62 852-1620-8562</p>
+              </div>
+
+              <div class="info-card glass">
+                <h6 class="d-flex align-items-center">
+                  <i class="fas fa-globe me-2 text-primary"></i>
+                  <span>Website</span>
+                </h6>
+                <p class="mb-0 text-secondary">https://nuruljadid.net/</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-4">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="mb-0 text-secondary">
+              <i class="fas fa-lock me-1"></i> Data terenkripsi dan aman
+            </p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="mb-0 text-secondary">
+              <i class="fas fa-calendar-alt me-1"></i>
+              Data terbaru:
+              <span id="last-updated-time" class="text-light fw-semibold"
+                >-</span
+              >
+            </p>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12 text-center">
+            <p class="small text-secondary mb-0">
+              © 2024 Dashboard Donasi Publik. Semua data ditampilkan secara
+              transparan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Config & Utils -->
+    <script>
+      const CONFIG = {
+        SHEETS: {
+          DANA: "Dana",
+        },
+        API_KEY: "AIzaSyDhgQ2nqwurITCU8oe2nJkerxxDk4s9W1E",
+        SPREADSHEET_ID: "153Y2Uvw-9p14AexTXr5PkFpif2SjYT4RZ_7FNPZYbtY",
+      };
+
+      const utils = {
+        formatCurrency: (amount) => {
+          if (!amount && amount !== 0) return "Rp 0";
+
+          if (amount >= 1000000000000) {
+            return `Rp ${(amount / 1000000000000).toFixed(2)}T`;
+          } else if (amount >= 1000000000) {
+            return `Rp ${(amount / 1000000000).toFixed(1)}M`;
+          } else if (amount >= 1000000) {
+            return `Rp ${(amount / 1000000).toFixed(1)}Jt`;
+          } else if (amount >= 1000) {
+            return `Rp ${(amount / 1000).toFixed(1)}K`;
+          }
+
+          return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }).format(amount);
+        },
+
+        formatCurrencyFull: (amount) => {
+          if (!amount && amount !== 0) return "Rp 0";
+
+          return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }).format(amount);
+        },
+
+        formatNumber: (number) => {
+          if (!number && number !== 0) return "0";
+
+          return new Intl.NumberFormat("id-ID").format(number);
+        },
+
+        formatDate: (dateString) => {
+          if (!dateString) return "-";
+          try {
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return "-";
+
+            return date.toLocaleDateString("id-ID", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            });
+          } catch (error) {
+            console.error("Error formatting date:", error);
+            return "-";
+          }
+        },
+
+        truncateText: (text, maxLength) => {
+          if (!text) return "-";
+          if (text.length <= maxLength) return text;
+          return text.substring(0, maxLength) + "...";
+        },
+
+        getTimeAgo: (date) => {
+          if (!date) return "Baru saja";
+
+          try {
+            const now = new Date();
+            const dateObj = new Date(date);
+
+            if (isNaN(dateObj.getTime())) return "Baru saja";
+
+            const diffInSeconds = Math.floor((now - dateObj) / 1000);
+
+            if (diffInSeconds < 60) return "Baru saja";
+            if (diffInSeconds < 3600)
+              return `${Math.floor(diffInSeconds / 60)} menit lalu`;
+            if (diffInSeconds < 86400)
+              return `${Math.floor(diffInSeconds / 3600)} jam lalu`;
+            return `${Math.floor(diffInSeconds / 86400)} hari lalu`;
+          } catch (error) {
+            console.error("Error calculating time ago:", error);
+            return "Baru saja";
+          }
+        },
+
+        parseAmount: (value) => {
+          if (!value && value !== 0) return 0;
+
+          if (typeof value === "number") return value;
+
+          const stringValue = String(value);
+          const numericString = stringValue
+            .replace(/[^0-9.,]/g, "")
+            .replace(",", ".");
+
+          const parsed = parseFloat(numericString);
+          return isNaN(parsed) ? 0 : parsed;
+        },
+      };
+
+      const PUBLIC_CONFIG = {
+        AUTO_REFRESH_INTERVAL: 300000,
+        MAX_RECENT_TRANSACTIONS: 0, // 0 means show all
+        SHOW_DONOR_NAMES: true,
+        CURRENCY: "IDR",
+        GOAL_TARGET: 0,
+        CONTACT_INFO: {
+          email: "humaspendanaanharlah@gmail.com",
+          phone: "+62 852-1620-8562",
+        },
+      };
+    </script>
+
+    <!-- Main Public Dashboard Script -->
+    <script src="public-dashboard.js"></script>
+  </body>
+</html>
