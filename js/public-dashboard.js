@@ -376,55 +376,88 @@ class PublicDashboard {
     }
     
     createTransactionHTML(row, index) {
-        const waktu = utils.getTimeAgo(row[0]);
-        const donorName = PUBLIC_CONFIG.SHOW_DONOR_NAMES ? (row[1] || 'Donatur Anonim') : 'Donatur Anonim';
-        const kategori = row[2] || 'Umum';
-        const jumlah = utils.formatCurrency(row[3]);
-        const metode = row[5] || '-';
-        const keterangan = utils.truncateText(row[6] || 'Donasi kemanusiaan', 50);
-        const tanggal = utils.formatDate(row[0]);
-        
-        const metodeColor = this.getMetodeColor(metode);
-        const kategoriColor = this.getKategoriColorClass(kategori);
-        
-        // Beri badge "NEW" untuk transaksi hari ini
-        const isToday = this.isToday(row[0]);
-        const newBadge = isToday ? 
-            '<span class="badge bg-danger ms-2"><i class="fas fa-star me-1"></i>Baru</span>' : '';
-        
-        return `
-            <div class="recent-transaction animate__animated animate__fadeInRight" 
-                 style="animation-delay: ${index * 0.02}s">
-                <div class="d-flex justify-content-between align-items-start">
-                    <div class="flex-grow-1">
-                        <div class="d-flex align-items-center mb-2">
-                            <h6 class="mb-0 me-2 fw-semibold text-light">${donorName}</h6>
-                            ${newBadge}
-                        </div>
-                        <div class="d-flex align-items-center mb-2">
-                            <span class="badge ${kategoriColor} me-2">${kategori}</span>
-                            <span class="badge bg-${metodeColor} me-2">${metode}</span>
-                            <span class="text-secondary small">
-                                <i class="fas fa-calendar me-1"></i>${tanggal}
-                            </span>
-                        </div>
-                        <p class="mb-2 small text-secondary">
-                            <i class="fas fa-comment me-1"></i>${keterangan}
-                        </p>
-                        <div class="small text-secondary">
-                            <i class="fas fa-user me-1"></i>${row[4] || '-'}
-                            <span class="mx-2">•</span>
-                            <i class="fas fa-clock me-1"></i>${waktu}
-                        </div>
+    const waktu = utils.getTimeAgo(row[0]);
+    const donorName = PUBLIC_CONFIG.SHOW_DONOR_NAMES ? (row[1] || 'Donatur Anonim') : 'Donatur Anonim';
+    const kategori = row[2] || 'Umum';
+    const jumlah = utils.formatCurrency(row[3]);
+    const metode = row[5] || '-';
+    const keterangan = utils.truncateText(row[6] || 'Donasi kemanusiaan', 50);
+    const tanggal = utils.formatDate(row[0]);
+    
+    const metodeColor = this.getMetodeColor(metode);
+    const kategoriColor = this.getKategoriColorClass(kategori);
+    
+    return `
+        <div class="recent-transaction animate__animated animate__fadeInRight" 
+             style="animation-delay: ${index * 0.02}s">
+            <div class="d-flex justify-content-between align-items-start">
+                <div class="flex-grow-1">
+                    <div class="d-flex align-items-center mb-2">
+                        <h6 class="mb-0 fw-semibold text-light">${donorName}</h6>
                     </div>
-                    <div class="text-end ms-3">
-                        <h5 class="mb-0 text-success fw-bold">${jumlah}</h5>
-                        <small class="text-secondary">Donasi</small>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge ${kategoriColor} me-2">${kategori}</span>
+                        <span class="badge bg-${metodeColor} me-2">${metode}</span>
+                        <span class="text-secondary small">
+                            <i class="fas fa-calendar me-1"></i>${tanggal}
+                        </span>
+                    </div>
+                    <p class="mb-2 small text-secondary">
+                        <i class="fas fa-comment me-1"></i>${keterangan}
+                    </p>
+                    <div class="small text-secondary">
+                        <i class="fas fa-user me-1"></i>${row[4] || '-'}
+                        <span class="mx-2">•</span>
+                        <i class="fas fa-clock me-1"></i>${waktu}
                     </div>
                 </div>
+                <div class="text-end ms-3">
+                    <h5 class="mb-0 text-success fw-bold">${jumlah}</h5>
+                    <small class="text-secondary">Donasi</small>
+                </div>
             </div>
-        `;
-    }
+        </div>
+    `;
+}
+        
+        // // Beri badge "NEW" untuk transaksi hari ini
+        // const isToday = this.isToday(row[0]);
+        // const newBadge = isToday ? 
+        //     '<span class="badge bg-danger ms-2"><i class="fas fa-star me-1"></i>Baru</span>' : '';
+        
+        // return `
+        //     <div class="recent-transaction animate__animated animate__fadeInRight" 
+        //          style="animation-delay: ${index * 0.02}s">
+        //         <div class="d-flex justify-content-between align-items-start">
+        //             <div class="flex-grow-1">
+        //                 <div class="d-flex align-items-center mb-2">
+        //                     <h6 class="mb-0 me-2 fw-semibold text-light">${donorName}</h6>
+        //                     ${newBadge}
+        //                 </div>
+        //                 <div class="d-flex align-items-center mb-2">
+        //                     <span class="badge ${kategoriColor} me-2">${kategori}</span>
+        //                     <span class="badge bg-${metodeColor} me-2">${metode}</span>
+        //                     <span class="text-secondary small">
+        //                         <i class="fas fa-calendar me-1"></i>${tanggal}
+        //                     </span>
+        //                 </div>
+        //                 <p class="mb-2 small text-secondary">
+        //                     <i class="fas fa-comment me-1"></i>${keterangan}
+        //                 </p>
+        //                 <div class="small text-secondary">
+        //                     <i class="fas fa-user me-1"></i>${row[4] || '-'}
+        //                     <span class="mx-2">•</span>
+        //                     <i class="fas fa-clock me-1"></i>${waktu}
+        //                 </div>
+        //             </div>
+        //             <div class="text-end ms-3">
+        //                 <h5 class="mb-0 text-success fw-bold">${jumlah}</h5>
+        //                 <small class="text-secondary">Donasi</small>
+        //             </div>
+        //         </div>
+        //     </div>
+        // `;
+    // }
     
     getSummaryHTML(dataCount) {
         return `
@@ -461,18 +494,18 @@ class PublicDashboard {
         `;
     }
     
-    isToday(dateString) {
-        try {
-            const today = new Date();
-            const date = new Date(dateString);
+    // isToday(dateString) {
+    //     try {
+    //         const today = new Date();
+    //         const date = new Date(dateString);
             
-            return date.getDate() === today.getDate() &&
-                   date.getMonth() === today.getMonth() &&
-                   date.getFullYear() === today.getFullYear();
-        } catch (error) {
-            return false;
-        }
-    }
+    //         return date.getDate() === today.getDate() &&
+    //                date.getMonth() === today.getMonth() &&
+    //                date.getFullYear() === today.getFullYear();
+    //     } catch (error) {
+    //         return false;
+    //     }
+    // }
     
     updateTopDonations(data) {
         if (data.length === 0) {
