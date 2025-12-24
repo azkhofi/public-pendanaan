@@ -625,7 +625,7 @@ class PublicDashboard {
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
                         <small class="text-secondary" style="font-size: 0.9rem;">
-                            Berdasarkan nominal donasi
+                            Berdasarkan nominal sumbangan
                         </small>
                     </div>
                     <span class="badge bg-warning" style="font-size: 0.75rem; padding: 4px 8px;">
